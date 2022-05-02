@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To do</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To Do</title>
+  <link rel="stylesheet" href="src/assets/css/styles.css">
+  <script src="src/assets/js/index.js" async></script>
 </head>
 <body>
-    
+  <header class="container">
+    <form id="add-task-form">
+      <input type="text" id="add-task-input" placeholder="Add new task">
+      <button id="add-task-btn">Add task</button>
+    </form>
+  </header>
+  <main>
+    <h1>My Tasks</h1>
+    <section class="container" id="to-do">
+      <h2>To do</h2>
+      <div id="tasks">
+        <!-- APPEND
+        <div class="task">
+          <div class="content">
+            <input type="checkbox" class="task-checkbox">
+            <input type="text" class="task-text" readonly>
+          </div>
+          <div class="actions">
+            <button class="edit-task-btn">Edit</button>
+            <button class="delete-task-btn">Delete</button>
+          </div>
+        </div>
+        -->
+      </div>
+    </section>
+   
+    <section class="container" id="completed">
+        <h2>Completed</h2>
+        <div id="completed-tasks">
+         <!-- APPEND completed tasks -->
+        </div>
+    </section>
+  </main>
 </body>
 </html>

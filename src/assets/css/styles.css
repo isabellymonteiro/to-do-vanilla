@@ -1,0 +1,7 @@
+.checked {
+    text-decoration: line-through;
+}
+
+.task {
+    border: 1px solid red;
+}
