@@ -1,96 +1,188 @@
 const addTaskForm = document.querySelector("#add-task-form")
 const addTaskInput = document.querySelector('#add-task-input')
-const addTaskButton = document.querySelector('#add-task-btn')
-
-addTaskForm.addEventListener("submit", addTask)
-
-function addTask(e) {
+const taskList = document.querySelector("#tasks")
+const completedTaskList = document.querySelector("#completed-tasks")
+const allTasksText = []
+const allCompletedTasksText = []
+ 
+addTaskForm.addEventListener("submit", preventDefault)
+ 
+function preventDefault(e) {
   e.preventDefault()
-  var taskText = addTaskInput.value
-  const taskList = document.querySelector("#tasks")
-  const completedList = document.querySelector("#completed-tasks")
-
+  addTask()
+}
+ 
+const addTask = (text = null) => {
+ 
+  if (!text) {
+    var taskText = addTaskInput.value.toLowerCase()
+    taskText = taskText[0].toUpperCase() + taskText.slice(1)
+  } else {
+    var taskText = text
+  }
+ 
   if (!taskText) {
     alert("Please fill out the task")
     return
   }
-
-  // task input (task element)
-  const task = document.createElement("div")
-  task.classList.add("task")
-
-  const taskContent = document.createElement("div")
-  taskContent.classList.add("content")
-
-  const taskCheckbox = document.createElement("input")
-  taskCheckbox.classList.add("task-checkbox")
-  taskCheckbox.type = "checkbox"
-
-  const taskInput = document.createElement("input")
-  taskInput.classList.add("task-text")
-  taskInput.type = "text"
-  taskInput.value = taskText
-  taskInput.setAttribute("readonly", "readonly")
-
-  taskContent.appendChild(taskCheckbox)
-  taskContent.appendChild(taskInput)
-  task.appendChild(taskContent)
-
-  // check class
-  taskContent.addEventListener("click", () => {
-     if (!taskCheckbox.getAttribute("checked")) {
-        taskCheckbox.setAttribute("checked", "checked")
-        taskInput.classList.add("checked")
-        taskList.removeChild(task)
-        completedList.appendChild(task)
-     } else {
-        taskCheckbox.removeAttribute("checked")
-        taskInput.classList.remove("checked")
-        taskList.appendChild(task)
-     }
+ 
+  allTasksText.push(taskText)
+ 
+  // order task list text
+  const tasksText = orderTaskList(allTasksText)
+ 
+  // clean previous task list
+  if (taskList) {
+    cleanTaskList()
+  }
+ 
+  // create new task list
+  const tasks = createTaskList(tasksText)
+ 
+  // append task element
+  tasks.map(task => {
+    taskList.appendChild(task)
   })
-
-  // actions (buttons)
-  const taskActions = document.createElement("div")
-  taskActions.classList.add("actions")
-
-  const editButton = document.createElement("button")
-  editButton.classList.add("edit-task-btn")
-  editButton.innerText = "Edit"
-
-  const deleteButton = document.createElement("button")
-  deleteButton.classList.add("delete-task-btn")
-  deleteButton.innerText = "Delete"
-
-  taskActions.appendChild(editButton)
-  taskActions.appendChild(deleteButton)
-  
-  task.appendChild(taskActions)
-
-  // edit task
-  editButton.addEventListener("click", () => {
-    if (editButton.innerText.toLowerCase() === "edit") {
+ 
+  // reset input value
+  if (!text) {
+    addTaskInput.value = ""
+  }
+}
+ 
+const addCompletedTask = (text) => {
+  var completedTaskText = text.toLowerCase()
+  completedTaskText = completedTaskText[0].toUpperCase() + completedTaskText.slice(1)
+ 
+  allCompletedTasksText.push(completedTaskText)
+ 
+  // order completed task list text
+  const completedTasksText = orderTaskList(allCompletedTasksText)
+ 
+  // clean previous completed task list
+  if (completedTaskList) {
+    cleanCompletedTaskList()
+  }
+ 
+  // create new completed task list
+  const completedTasks = createTaskList(completedTasksText, completed)
+ 
+  // append completed task element
+  completedTasks.map(completedTask => {
+    completedTaskList.appendChild(completedTask)
+  })
+}
+ 
+const cleanTaskList = () => {
+  while (taskList.firstChild) {
+    taskList.removeChild(taskList.firstChild)
+  }
+}
+ 
+const cleanCompletedTaskList = () => {
+  while (completedTaskList.firstChild) {
+    completedTaskList.removeChild(completedTaskList.firstChild)
+  }
+}
+ 
+const orderTaskList = (tasksText) => {
+  return tasksText.sort()
+}
+ 
+const createTaskList = (tasksText, completed = null) => {
+  // create task input and checkbox
+  const tasks = tasksText.map(taskText => {
+    const task = createElement("div")
+    task.classList.add("task")
+ 
+    const taskContent = createElement("div")
+    taskContent.classList.add("content")
+ 
+    const taskCheckbox = createElement("input")
+    taskCheckbox.classList.add("task-checkbox")
+    taskCheckbox.type = "checkbox"
+ 
+    const taskInput = createElement("input")
+    taskInput.classList.add("task-text")
+    taskInput.type = "text"
+    taskInput.value = taskText
+    taskInput.setAttribute("readonly", "readonly")
+ 
+    if (completed) {
+      taskCheckbox.setAttribute("checked", "checked")
+      taskInput.classList.add("checked")
+    }
+ 
+    // check class
+    taskCheckbox.addEventListener("click", () => {
+      if (!taskCheckbox.getAttribute("checked")) {
+          taskList.removeChild(task)
+          allTasksText.splice(allTasksText.indexOf(taskInput.value), 1)
+          addCompletedTask(taskInput.value)
+      } else {
+          completedTaskList.removeChild(task)
+          allCompletedTasksText.splice(allCompletedTasksText.indexOf(taskInput.value), 1)
+          addTask(taskInput.value)
+      }
+    })
+ 
+    taskContent.appendChild(taskCheckbox)
+    taskContent.appendChild(taskInput)
+    task.appendChild(taskContent)
+ 
+    // actions (buttons)
+    const taskActions = createElement("div")
+    taskActions.classList.add("actions")
+ 
+    const editButton = createElement("button")
+    editButton.classList.add("edit-task-btn")
+    editButton.innerText = "EDIT"
+ 
+    const deleteButton = createElement("button")
+    deleteButton.classList.add("delete-task-btn")
+    deleteButton.innerText = "DELETE"
+ 
+    // edit task
+    editButton.addEventListener("click", () => {
+      if (editButton.innerText.toUpperCase() === "EDIT") {
         taskInput.removeAttribute("readonly")
         taskInput.focus()
-        editButton.innerText = "Save"
-    } else {
-        taskInput.setAttribute("readonly", "readonly")
-        editButton.innerText = "Edit"
-    }
-  })
-  
-  // delete task
-  deleteButton.addEventListener("click", () => {
-    if (taskList.contains(task)) {
+        editButton.innerText = "SAVE"
+      } else {
+          if (completed) {
+            completedTaskList.removeChild(task)
+            allCompletedTasksText.splice(allCompletedTasksText.indexOf(taskInput.value), 1)
+            addCompletedTask(taskInput.value)
+          } else {
+            taskList.removeChild(task)
+            allTasksText.splice(allTasksText.indexOf(taskInput.value), 1)
+            addTask(taskInput.value)
+          }
+      }
+    })
+   
+    // delete task
+    deleteButton.addEventListener("click", () => {
+      if (taskList.contains(task)) {
         taskList.removeChild(task)
-    } else {
-        completedList.removeChild(task)
-    }
+        allTasksText.splice(allTasksText.indexOf(taskInput.value), 1)
+      } else {
+        completedTaskList.removeChild(task)
+        allCompletedTasksText.splice(allCompletedTasksText.indexOf(taskInput.value), 1)
+      }
+    })
+ 
+    taskActions.appendChild(editButton)
+    taskActions.appendChild(deleteButton)
+    task.appendChild(taskActions)
+ 
+    return task
   })
-
-  // append task element
-  taskList.appendChild(task)
-
-  // reset input value
-  addTaskInput.value = ""
+ 
+  return tasks
 }
+ 
+const createElement = (element) => {
+  return document.createElement(element)
+}
+ 

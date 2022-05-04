@@ -7,18 +7,26 @@
   <title>To Do</title>
   <link rel="stylesheet" href="src/assets/css/styles.css">
   <script src="src/assets/js/index.js" async></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="container">
-    <form id="add-task-form">
-      <input type="text" id="add-task-input" placeholder="Add new task">
-      <button id="add-task-btn">Add task</button>
-    </form>
+  <header class="top-container">
+    <div class="container">
+      <form id="add-task-form">
+        <input type="text" id="add-task-input" placeholder="Add new task">
+        <button id="add-task-btn">
+          <img src="src/assets/icons/rightArrow.svg" alt="Arrow pointing to the right to enter task">
+        </button>
+      </form>
+      <button id="menu-btn">
+        <img src="src/assets/icons/menu.svg" alt="Menu">
+      </button>
+    </div>
   </header>
   <main>
-    <h1>My Tasks</h1>
-    <section class="container" id="to-do">
-      <h2>To do</h2>
+    <section class="container" id="to-do-list">
       <div id="tasks">
         <!-- APPEND
         <div class="task">
@@ -34,7 +42,6 @@
         -->
       </div>
     </section>
-   
     <section class="container" id="completed">
         <h2>Completed</h2>
         <div id="completed-tasks">
