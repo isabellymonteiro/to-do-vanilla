@@ -9,18 +9,18 @@ img {
     max-width: 100%;
 }
 
-h2 {
-    font-size: 1.75rem;
-    margin: 0;
-    margin-bottom: 60px;
-}
-
 h1, h2 {
+    margin: 0;
     font-weight: 400;
 }
 
+h2 {
+    font-size: 1.75rem;
+    margin-bottom: 60px;
+}
+
 input, button {
-    font-size: 1.125rem;
+    font-size: clamp(1rem, 2vw, 1.125rem);
     appearance: none;
     border: none;
     outline: none;
@@ -51,14 +51,19 @@ button:hover {
     max-width: 1280px;
 }
 
+#my-tasks {
+    display: none;
+}
+
 #add-task-form {
     display: flex;
-    box-shadow: 1px 1px 2px rgba(66, 75, 88, 0.3), 
-                -1px -1px 2px rgba(46, 53, 62, 0.5), 
-                inset -3px 3px 6px rgba(46, 53, 62, 0.2), 
-                inset 3px -3px 6px rgba(46, 53, 62, 0.2), 
-                inset -3px -3px 6px rgba(66, 75, 88, 0.9), 
-                inset 3px 3px 8px rgba(46, 53, 62, 0.9);
+    box-shadow: 
+        1px 1px 2px rgba(66, 75, 88, 0.3), 
+        -1px -1px 2px rgba(46, 53, 62, 0.5), 
+        inset -3px 3px 6px rgba(46, 53, 62, 0.2), 
+        inset 3px -3px 6px rgba(46, 53, 62, 0.2), 
+        inset -3px -3px 6px rgba(66, 75, 88, 0.9), 
+        inset 3px 3px 8px rgba(46, 53, 62, 0.9);
     border-radius: 1rem;
     max-width: 600px;
     margin: 0 auto;
@@ -95,20 +100,34 @@ button:hover {
     width: 100%;
 }
 
-.task {
+.task, .completed-task {
     display: flex;
-    box-shadow: -5px 5px 10px rgba(48, 54, 64, 0.2), 
-                5px -5px 10px rgba(48, 54, 64, 0.2), 
-                -5px -5px 10px rgba(64, 74, 86, 0.9), 
-                5px 5px 13px rgba(48, 54, 64, 0.9), 
-                inset 1px 1px 2px rgba(64, 74, 86, 0.3), 
-                inset -1px -1px 2px rgba(48, 54, 64, 0.5);
     border-radius: 1rem;
     padding: 1.25em;
     margin-bottom: 60px;
     width: 40%;
     align-items: center;
     justify-content: space-between;
+}
+
+.task {
+    box-shadow: 
+        -5px 5px 10px rgba(48, 54, 64, 0.2), 
+        5px -5px 10px rgba(48, 54, 64, 0.2), 
+        -5px -5px 10px rgba(64, 74, 86, 0.9), 
+        5px 5px 13px rgba(48, 54, 64, 0.9), 
+        inset 1px 1px 2px rgba(64, 74, 86, 0.3), 
+        inset -1px -1px 2px rgba(48, 54, 64, 0.5);
+}
+
+.completed-task {
+    box-shadow: 
+        1px 1px 2px rgba(64, 74, 86, 0.3),
+        -1px -1px 2px rgba(48, 54, 64, 0.5),
+        inset -5px 5px 10px rgba(48, 54, 64, 0.2),
+        inset 5px -5px 10px rgba(48, 54, 64, 0.2),
+        inset -5px -5px 10px rgba(64, 74, 86, 0.9),
+        inset 5px 5px 13px rgba(48, 54, 64, 0.9);
 }
 
 .content {
@@ -141,8 +160,8 @@ button:hover {
 
 .task-text {
     flex-grow: 1;
-    font-size: 1.125rem;
     color: #94ADCF;
+    font-weight: 500;
 }
 
 .actions {
@@ -151,6 +170,95 @@ button:hover {
 }
 
 .edit-task-btn, .delete-task-btn {
-    font-size: 1em;
+    font-size: clamp(0.875rem, 2vw, 1rem);
     color: #94ADCF;
+}
+
+@media (max-width: 420px) {
+
+    h2 {
+        font-size: 1.125rem;
+        margin-bottom: 40px;
+    }
+
+    .top-container {
+        margin: 60px auto;
+    }
+
+    #my-tasks {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    #menu-btn {
+        margin:  0;
+    }
+
+    #tasks, #completed-tasks {
+        flex-direction: column;
+        gap: 2em;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .task, .completed-task {
+        padding: 1em;
+        margin-bottom: 0;
+        width: 90%;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .task-checkbox {
+        height: 0.85em;
+        width: 0.85em;
+        border-width: 2px;
+        margin-right: 1em;
+    }
+
+    .mobile-add-task-btn {
+        position: fixed;
+        right: 2rem;
+        bottom: 3rem;
+        width: 4.25em;
+        height: 4.25em;
+        border-radius: 50%;
+        box-shadow: 
+            -1px 1px 2px rgba(22, 26, 30, 0.2), 
+            1px -1px 2px rgba(22, 26, 30, 0.2), 
+            -1px -1px 2px rgba(90, 102, 120, 0.9), 
+            1px 1px 3px rgba(22, 26, 30, 0.9), 
+            inset 1px 1px 2px rgba(90, 102, 120, 0.3), 
+            inset -1px -1px 2px rgba(22, 26, 30, 0.5);
+        background:
+            linear-gradient(#94ADCF 0 0),
+            linear-gradient(#94ADCF 0 0),
+            #38404B;
+        background-position: center;
+        background-size: 50% 2px,2px 50%; /*thickness = 2px, length = 50% (4.25em / 2)*/
+        background-repeat: no-repeat;
+    }
+
+    .mobile-add-task-btn--active {
+        background:
+            linear-gradient(#38404B 0 0),
+            linear-gradient(#38404B 0 0),
+            #94ADCF;
+        background-position: center;
+        background-size: 50% 2px,2px 50%; /*thickness = 2px, length = 50% (4.25em / 2)*/
+        background-repeat: no-repeat;
+    }
+
+    #add-task-form {
+        display: none;
+    }
+
+    /* modal */
+    /*
+    body {
+        backdrop-filter: blur(4px);
+    }; */ 
+
 }

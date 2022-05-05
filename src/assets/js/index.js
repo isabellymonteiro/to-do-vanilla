@@ -2,14 +2,36 @@ const addTaskForm = document.querySelector("#add-task-form")
 const addTaskInput = document.querySelector('#add-task-input')
 const taskList = document.querySelector("#tasks")
 const completedTaskList = document.querySelector("#completed-tasks")
+const mobileAddTaskButton = document.querySelector(".mobile-add-task-btn")
 const allTasksText = []
 const allCompletedTasksText = []
  
 addTaskForm.addEventListener("submit", preventDefault)
+mobileAddTaskButton.addEventListener("click", mobileAddTask)
  
 function preventDefault(e) {
   e.preventDefault()
   addTask()
+}
+
+function mobileAddTask() {
+  if (mobileAddTaskButton.classList.contains("mobile-add-task-btn--active")) {
+    addTaskInput.value = ""
+    hideForm()
+  } else {
+    showForm()
+  }
+}
+
+const showForm = () => {
+  mobileAddTaskButton.classList.add("mobile-add-task-btn--active")
+  addTaskForm.style.display = "flex"
+  addTaskForm.style.marginTop = "40px"
+}
+
+const hideForm = () => {
+  mobileAddTaskButton.classList.remove("mobile-add-task-btn--active")
+  addTaskForm.style.display = "none"
 }
  
 const addTask = (text = null) => {
@@ -93,7 +115,11 @@ const createTaskList = (tasksText, completed = null) => {
   // create task input and checkbox
   const tasks = tasksText.map(taskText => {
     const task = createElement("div")
-    task.classList.add("task")
+    if (completed) {
+      task.classList.add("completed-task")
+    } else {
+      task.classList.add("task")
+    }
  
     const taskContent = createElement("div")
     taskContent.classList.add("content")
