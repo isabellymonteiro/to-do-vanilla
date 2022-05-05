@@ -38,14 +38,14 @@ const addTask = (text = null) => {
  
   if (!text) {
     var taskText = addTaskInput.value.toLowerCase()
+      if (!taskText) {
+        alert("Please fill out the task")
+        return
+      }
     taskText = taskText[0].toUpperCase() + taskText.slice(1)
   } else {
-    var taskText = text
-  }
- 
-  if (!taskText) {
-    alert("Please fill out the task")
-    return
+    var taskText = text.toLowerCase()
+    taskText = taskText[0].toUpperCase() + taskText.slice(1)
   }
  
   allTasksText.push(taskText)
