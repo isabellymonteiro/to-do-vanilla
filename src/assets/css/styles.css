@@ -174,14 +174,58 @@ button:hover {
     color: #94ADCF;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 1024px) {
     h2 {
-        font-size: 1.125rem;
         margin-bottom: 40px;
+    }
+
+    .container {
+        max-width: 800px;
     }
 
     .top-container {
         margin: 60px auto;
+    }
+
+    .sub-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #add-task-form {
+        margin: 0;
+        margin-right: 1em;
+        width: 100%;
+    }
+
+    #menu-btn {
+        position: static;
+        align-self: end;
+    }
+
+    #tasks, #completed-tasks {
+        flex-direction: column;
+        gap: 2em;
+        width: 90%;
+        margin-bottom: 40px;
+    }
+
+    .task, .completed-task {
+        padding: 1em;
+        margin-bottom: 0;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 420px) {
+    h2 {
+        font-size: 1.125rem;
+    }
+
+    .container {
+        display: block;
     }
 
     #mobile-my-tasks {
@@ -195,23 +239,16 @@ button:hover {
     } 
 
     #menu-btn {
-        margin:  0;
+        position: absolute;
+        margin: 0;
     }
 
     #tasks, #completed-tasks {
-        flex-direction: column;
-        gap: 2em;
-        justify-content: space-between;
         width: 100%;
-        margin-bottom: 40px;
     }
 
-    .task, .completed-task {
-        padding: 1em;
-        margin-bottom: 0;
+    .task, .completed-task { 
         width: 90%;
-        align-items: center;
-        justify-content: space-between;
     }
 
     .task-checkbox {
