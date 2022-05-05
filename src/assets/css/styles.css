@@ -51,7 +51,7 @@ button:hover {
     max-width: 1280px;
 }
 
-#my-tasks {
+#mobile-my-tasks {
     display: none;
 }
 
@@ -175,7 +175,6 @@ button:hover {
 }
 
 @media (max-width: 420px) {
-
     h2 {
         font-size: 1.125rem;
         margin-bottom: 40px;
@@ -185,11 +184,15 @@ button:hover {
         margin: 60px auto;
     }
 
-    #my-tasks {
+    #mobile-my-tasks {
         display: block;
         font-size: 1.5rem;
         font-weight: 700;
     }
+
+    #add-task-form {
+        display: none;
+    } 
 
     #menu-btn {
         margin:  0;
@@ -250,15 +253,4 @@ button:hover {
         background-size: 50% 2px,2px 50%; /*thickness = 2px, length = 50% (4.25em / 2)*/
         background-repeat: no-repeat;
     }
-
-    #add-task-form {
-        display: none;
-    }
-
-    /* modal */
-    /*
-    body {
-        backdrop-filter: blur(4px);
-    }; */ 
-
 }
