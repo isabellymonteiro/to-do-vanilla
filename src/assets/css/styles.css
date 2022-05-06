@@ -169,9 +169,25 @@ button:hover {
     justify-content: space-between;
 }
 
-.edit-task-btn, .delete-task-btn {
-    font-size: clamp(0.875rem, 2vw, 1rem);
-    color: #94ADCF;
+.edit-task-btn, .save-task-btn, .delete-task-btn {
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: 0;
+}
+.edit-task-btn {
+    background-image: url(../icons/edit.svg);
+    margin-right: 20px;
+}
+
+.save-task-btn {
+    background-image: url(../icons/save.svg);
+    margin-right: 20px;
+}
+
+.delete-task-btn {
+    background-image: url(../icons/delete.svg);
+    margin-right: 10px;
 }
 
 @media (max-width: 1024px) {

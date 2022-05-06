@@ -26,12 +26,14 @@ function mobileAddTask() {
 
 const showForm = () => {
   mobileAddTaskButton.classList.add("mobile-add-task-btn--active")
+  mobileAddTaskButton.setAttribute("aria-label", "close add task form")
   addTaskForm.style.display = "flex"
   addTaskForm.style.marginTop = "40px"
 }
 
 const hideForm = () => {
   mobileAddTaskButton.classList.remove("mobile-add-task-btn--active")
+  mobileAddTaskButton.setAttribute("aria-label", "open add task form")
   addTaskForm.style.display = "none"
 }
 
@@ -165,18 +167,20 @@ const createTaskList = (tasksText, completed = null) => {
  
     const editButton = createElement("button")
     editButton.classList.add("edit-task-btn")
-    editButton.innerText = "EDIT"
+    editButton.setAttribute("aria-label", "edit task")
  
     const deleteButton = createElement("button")
     deleteButton.classList.add("delete-task-btn")
-    deleteButton.innerText = "DELETE"
- 
+    deleteButton.setAttribute("aria-label", "delete task")
+
     // edit task
     editButton.addEventListener("click", () => {
-      if (editButton.innerText.toUpperCase() === "EDIT") {
+      if (editButton.classList.contains("edit-task-btn")) {
         taskInput.removeAttribute("readonly")
         taskInput.focus()
-        editButton.innerText = "SAVE"
+        editButton.classList.remove("edit-task-btn")
+        editButton.classList.add("save-task-btn")
+        editButton.setAttribute("aria-label", "save task")
       } else {
           if (completed) {
             completedTaskList.removeChild(task)
