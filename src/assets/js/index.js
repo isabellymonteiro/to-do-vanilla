@@ -84,7 +84,7 @@ const addCompletedTask = (text) => {
     cleanCompletedTaskList()
   }
  
-  const completedTasks = createTaskList(completedTasksText, completed)
+  const completedTasks = createTaskList(completedTasksText, true)
  
   completedTasks.map(completedTask => {
     completedTaskList.appendChild(completedTask)
