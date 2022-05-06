@@ -51,7 +51,7 @@ const addTask = (text = null) => {
     var taskText = text.toLowerCase()
   }
 
-  taskText = taskText[0].toUpperCase() + taskText.slice(1)
+  taskText = taskText[0].toUpperCase() + taskText.slice(1) // css ::first-letter doesn't work on inputs
  
   allTasksText.push(taskText)
  
