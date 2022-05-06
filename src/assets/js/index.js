@@ -55,23 +55,18 @@ const addTask = (text = null) => {
  
   allTasksText.push(taskText)
  
-  // order task list text
   const tasksText = orderTaskList(allTasksText)
  
-  // clean previous task list
   if (taskList) {
     cleanTaskList()
   }
  
-  // create new task list
   const tasks = createTaskList(tasksText)
  
-  // append task element
   tasks.map(task => {
     taskList.appendChild(task)
   })
  
-  // reset input value
   if (!text) {
     addTaskInput.value = ""
   }
@@ -83,18 +78,14 @@ const addCompletedTask = (text) => {
  
   allCompletedTasksText.push(completedTaskText)
  
-  // order completed task list text
   const completedTasksText = orderTaskList(allCompletedTasksText)
  
-  // clean previous completed task list
   if (completedTaskList) {
     cleanCompletedTaskList()
   }
  
-  // create new completed task list
   const completedTasks = createTaskList(completedTasksText, completed)
  
-  // append completed task element
   completedTasks.map(completedTask => {
     completedTaskList.appendChild(completedTask)
   })
@@ -117,7 +108,6 @@ const orderTaskList = (tasksText) => {
 }
  
 const createTaskList = (tasksText, completed = null) => {
-  // create task input and checkbox
   const tasks = tasksText.map(taskText => {
     const task = createElement("li")
     if (completed) {
@@ -144,7 +134,6 @@ const createTaskList = (tasksText, completed = null) => {
       taskInput.classList.add("checked")
     }
  
-    // check class
     taskCheckbox.addEventListener("click", () => {
       if (!taskCheckbox.getAttribute("checked")) {
           taskList.removeChild(task)
@@ -161,7 +150,6 @@ const createTaskList = (tasksText, completed = null) => {
     taskContent.appendChild(taskInput)
     task.appendChild(taskContent)
  
-    // actions (buttons)
     const taskActions = createElement("div")
     taskActions.classList.add("actions")
  
@@ -173,7 +161,6 @@ const createTaskList = (tasksText, completed = null) => {
     deleteButton.classList.add("delete-task-btn")
     deleteButton.setAttribute("aria-label", "delete task")
 
-    // edit task
     editButton.addEventListener("click", () => {
       if (editButton.classList.contains("edit-task-btn")) {
         taskInput.removeAttribute("readonly")
@@ -194,7 +181,6 @@ const createTaskList = (tasksText, completed = null) => {
       }
     })
    
-    // delete task
     deleteButton.addEventListener("click", () => {
       if (taskList.contains(task)) {
         taskList.removeChild(task)
