@@ -1,6 +1,9 @@
 * {
-    margin: 0;
     box-sizing: border-box;
+    margin: 0;
+}
+
+body {
     font-family: 'Ubuntu', sans-serif;
     background-color: #38404B;
     color: #94ADCF;
