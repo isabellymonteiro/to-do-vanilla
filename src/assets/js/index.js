@@ -165,8 +165,7 @@ const createTaskList = (tasksText, completed = null) => {
       if (editButton.classList.contains("edit-task-btn")) {
         taskInput.removeAttribute("readonly")
         taskInput.focus()
-        editButton.classList.remove("edit-task-btn")
-        editButton.classList.add("save-task-btn")
+        editButton.classList.replace("edit-task-btn", "save-task-btn")
         editButton.setAttribute("aria-label", "save task")
       } else {
           if (completed) {
