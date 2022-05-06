@@ -119,7 +119,7 @@ const orderTaskList = (tasksText) => {
 const createTaskList = (tasksText, completed = null) => {
   // create task input and checkbox
   const tasks = tasksText.map(taskText => {
-    const task = createElement("div")
+    const task = createElement("li")
     if (completed) {
       task.classList.add("completed-task")
     } else {
