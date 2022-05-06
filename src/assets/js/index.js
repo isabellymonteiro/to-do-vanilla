@@ -14,6 +14,7 @@ function preventDefault(e) {
   addTask()
 }
 
+// mobile only
 function mobileAddTask() {
   if (mobileAddTaskButton.classList.contains("mobile-add-task-btn--active")) {
     addTaskInput.value = ""
@@ -33,6 +34,8 @@ const hideForm = () => {
   mobileAddTaskButton.classList.remove("mobile-add-task-btn--active")
   addTaskForm.style.display = "none"
 }
+
+// desktop, tablet and mobile (all devices)
  
 const addTask = (text = null) => {
  
@@ -42,11 +45,11 @@ const addTask = (text = null) => {
         alert("Please fill out the task")
         return
       }
-    taskText = taskText[0].toUpperCase() + taskText.slice(1)
   } else {
     var taskText = text.toLowerCase()
-    taskText = taskText[0].toUpperCase() + taskText.slice(1)
   }
+
+  taskText = taskText[0].toUpperCase() + taskText.slice(1)
  
   allTasksText.push(taskText)
  
