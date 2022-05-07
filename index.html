@@ -13,11 +13,25 @@
 </head>
 <body>
   <header class="top-container">
-    <div class="container sub-container">
+    <div class="container header">
+
+      <!-- mobile only -->
       <h1 id="mobile-my-tasks">My tasks</h1>
+      <dialog id="mobile-modal">
+        <form id="mobile-add-task-form">
+          <input type="text" id="mobile-add-task-input" placeholder="Add new task" autocomplete="off">
+          <button class="add-task-btn">
+            <img src="src/assets/icons/rightArrow.svg" alt="Submit task">
+          </button>
+        </form>
+        <button class="mobile-modal-button" id="mobile-close-modal" aria-label="close add task form"></button>
+      </dialog>
+      <button class="mobile-modal-button" id="mobile-open-modal" aria-label="open add task form"></button>
+      <!-- end mobile only -->
+
       <form id="add-task-form">
         <input type="text" id="add-task-input" placeholder="Add new task" autocomplete="off">
-        <button id="add-task-btn">
+        <button class="add-task-btn">
           <img src="src/assets/icons/rightArrow.svg" alt="Submit task">
         </button>
       </form>
@@ -49,7 +63,6 @@
          <!-- APPEND completed tasks -->
         </ul>
     </section>
-    <button class="mobile-add-task-btn" aria-label="open add task form"></button>
   </main>
 </body>
 </html>

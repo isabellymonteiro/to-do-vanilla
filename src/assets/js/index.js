@@ -2,47 +2,40 @@ const addTaskForm = document.querySelector("#add-task-form")
 const addTaskInput = document.querySelector('#add-task-input')
 const taskList = document.querySelector("#tasks")
 const completedTaskList = document.querySelector("#completed-tasks")
-const mobileAddTaskButton = document.querySelector(".mobile-add-task-btn")
+
+const mobileModal = document.querySelector("#mobile-modal")
+const mobileAddTaskForm = document.querySelector("#mobile-add-task-form")
+const mobileAddTaskInput = document.querySelector('#mobile-add-task-input')
+
+const openModal = document.querySelector("#mobile-open-modal")
+const closeModal = document.querySelector("#mobile-close-modal")
+
 const allTasksText = []
 const allCompletedTasksText = []
  
 addTaskForm.addEventListener("submit", preventDefault)
-mobileAddTaskButton.addEventListener("click", mobileAddTask)
- 
+mobileAddTaskForm.addEventListener("submit", preventDefault)
+
 function preventDefault(e) {
   e.preventDefault()
   addTask()
 }
 
 // mobile only
-function mobileAddTask() {
-  if (mobileAddTaskButton.classList.contains("mobile-add-task-btn--active")) {
-    addTaskInput.value = ""
-    hideForm()
-  } else {
-    showForm()
-  }
-}
+openModal.addEventListener("click", () => {
+  mobileModal.showModal()
+})
 
-const showForm = () => {
-  mobileAddTaskButton.classList.add("mobile-add-task-btn--active")
-  mobileAddTaskButton.setAttribute("aria-label", "close add task form")
-  addTaskForm.style.display = "flex"
-  addTaskForm.style.marginTop = "40px"
-}
-
-const hideForm = () => {
-  mobileAddTaskButton.classList.remove("mobile-add-task-btn--active")
-  mobileAddTaskButton.setAttribute("aria-label", "open add task form")
-  addTaskForm.style.display = "none"
-}
+closeModal.addEventListener("click", () => {
+  mobileModal.close()
+})
 
 // desktop, tablet and mobile (all devices)
- 
 const addTask = (text = null) => {
  
   if (!text) {
-    var taskText = addTaskInput.value.toLowerCase()
+    var taskText = addTaskInput.value ? addTaskInput.value : mobileAddTaskInput.value
+    taskText.toLowerCase()
       if (!taskText) {
         alert("Please fill out the task")
         return
@@ -68,7 +61,7 @@ const addTask = (text = null) => {
   })
  
   if (!text) {
-    addTaskInput.value = ""
+    addTaskInput.value ? addTaskInput.value = "" : mobileAddTaskInput.value = ""
   }
 }
  
