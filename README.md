@@ -5,7 +5,7 @@ Based on: [Figma - To Do List](https://www.figma.com/file/0g74xF6AGDCWHOPbA4Rt1j
 
 ## Check it out
 
-Deployed on Netlify: [To Do App]()
+Deployed on Vercel: [To Do App](https://to-do-vanilla.vercel.app/)
 
 ## Try it yourself
 
